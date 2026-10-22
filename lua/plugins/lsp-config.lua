@@ -9,26 +9,27 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "rust_analyzer" },
+			ensure_installed = {
+				"clangd",
+				"pyright",
+				"lua_ls",
+				"ts_ls",
+				"html",
+				"cssls",
+				"tailwindcss",
+				"yamlls",
+				"cmake",
+				"texlab",
+			},
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"clangd",
-					"pyright",
-					"lua_ls",
-					"ts_ls",
-					"html",
-					"cssls",
-					"tailwindcss",
-					"yamlls",
-					"cmake",
-					"texlab",
-				},
+			vim.diagnostic.config({
+				virtual_text = true,
+				underline = true,
 			})
 		end,
 	},
@@ -42,6 +43,7 @@ return {
 					"--background-index",
 					"--clang-tidy",
 				},
+				filetypes = { "c", "cpp" },
 			})
 			vim.lsp.enable("clangd")
 
@@ -55,6 +57,33 @@ return {
 				},
 			})
 			vim.lsp.enable("lua_ls")
+
+			vim.lsp.config("pyright", {
+				cmd = { "pyright-langserver", "--stdio" },
+				filetypes = { "python" },
+				settings = {
+					python = {
+						analysis = {
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+							diagnosticMode = "openFilesOnly",
+						},
+					},
+				},
+			})
+			vim.lsp.enable("pyright")
+
+			vim.lsp.config("ts_ls", {
+				init_options = {
+					hostInfo = "neovim",
+				},
+			})
+			vim.lsp.enable("ts_ls")
+			vim.lsp.enable("html")
+			vim.lsp.enable("cssls")
+			vim.lsp.enable("tailwindcss")
+			vim.lsp.enable("eslint")
+			vim.lsp.enable("jsonls")
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(event)
