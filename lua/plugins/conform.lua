@@ -7,16 +7,23 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				c = { "clang-format" },
+				cpp = { "clang-format" },
+				css = { "prettier" },
+				html = { "prettier" },
+				js = { "prettier" },
+				latex = { "latexindent" },
 				lua = { "stylua" },
 				python = { "black" },
+				react = { "prettier" },
+				ts = { "prettier" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_format = "fallback",
 			},
 		})
-		vim.keymap.set("n", "<leader>f", function()
-			require("conform").format({ async = true, lsp_fallback = true })
-		end, { desc = "Format buffer" })
+		--		vim.keymap.set("n", "<leader>f", function()
+		--require("conform").format({ async = true, lsp_fallback = true })
+		--end, { desc = "Format buffer" })
 	end,
 }

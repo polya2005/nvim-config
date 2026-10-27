@@ -17,9 +17,12 @@ return {
 				"html",
 				"cssls",
 				"tailwindcss",
+				"eslint-lsp",
+				"json-lsp",
 				"yamlls",
 				"cmake",
 				"texlab",
+				"stylua",
 			},
 		},
 		dependencies = {
@@ -37,6 +40,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- C/C++
 			vim.lsp.config("clangd", {
 				cmd = {
 					"clangd",
@@ -44,9 +49,17 @@ return {
 					"--clang-tidy",
 				},
 				filetypes = { "c", "cpp" },
+				capabilities = capabilities,
 			})
 			vim.lsp.enable("clangd")
 
+			-- Assembly
+			vim.lsp.config("asm-lsp", {
+				capabilities = capabilities,
+			})
+			vim.lsp.enable("asm-lsp")
+
+			-- Lua
 			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
@@ -55,9 +68,11 @@ return {
 						},
 					},
 				},
+				capabilities = capabilities,
 			})
 			vim.lsp.enable("lua_ls")
 
+			-- Python
 			vim.lsp.config("pyright", {
 				cmd = { "pyright-langserver", "--stdio" },
 				filetypes = { "python" },
@@ -70,13 +85,31 @@ return {
 						},
 					},
 				},
+				capabilities = capabilities,
 			})
 			vim.lsp.enable("pyright")
 
+			-- Web dev
 			vim.lsp.config("ts_ls", {
 				init_options = {
 					hostInfo = "neovim",
 				},
+				capabilities = capabilities,
+			})
+			vim.lsp.config("html", {
+				capabilities = capabilities,
+			})
+			vim.lsp.config("cssls", {
+				capabilities = capabilities,
+			})
+			vim.lsp.config("tailwindcss", {
+				capabilities = capabilities,
+			})
+			vim.lsp.config("eslint", {
+				capabilities = capabilities,
+			})
+			vim.lsp.config("jsonls", {
+				capabilities = capabilities,
 			})
 			vim.lsp.enable("ts_ls")
 			vim.lsp.enable("html")
