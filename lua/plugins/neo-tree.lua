@@ -20,7 +20,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
+		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left toggle<CR>", {})
 		require("neo-tree").setup(opts)
 	end,
 }
