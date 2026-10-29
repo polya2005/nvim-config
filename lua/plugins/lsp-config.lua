@@ -77,11 +77,11 @@ return {
 				cmd = { "pyright-langserver", "--stdio" },
 				filetypes = { "python" },
 				settings = {
-					python = {
+					pyright = {
 						analysis = {
 							autoSearchPaths = true,
 							useLibraryCodeForTypes = true,
-							diagnosticMode = "openFilesOnly",
+							diagnosticMode = "workspace",
 						},
 					},
 				},
