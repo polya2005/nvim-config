@@ -40,7 +40,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			-- C/C++
 			vim.lsp.config("clangd", {
 				cmd = {
@@ -49,14 +48,10 @@ return {
 					"--clang-tidy",
 				},
 				filetypes = { "c", "cpp" },
-				capabilities = capabilities,
 			})
 			vim.lsp.enable("clangd")
 
 			-- Assembly
-			vim.lsp.config("asm-lsp", {
-				capabilities = capabilities,
-			})
 			vim.lsp.enable("asm-lsp")
 
 			-- Lua
@@ -68,7 +63,6 @@ return {
 						},
 					},
 				},
-				capabilities = capabilities,
 			})
 			vim.lsp.enable("lua_ls")
 
@@ -85,7 +79,6 @@ return {
 						},
 					},
 				},
-				capabilities = capabilities,
 			})
 			vim.lsp.enable("pyright")
 
@@ -94,22 +87,6 @@ return {
 				init_options = {
 					hostInfo = "neovim",
 				},
-				capabilities = capabilities,
-			})
-			vim.lsp.config("html", {
-				capabilities = capabilities,
-			})
-			vim.lsp.config("cssls", {
-				capabilities = capabilities,
-			})
-			vim.lsp.config("tailwindcss", {
-				capabilities = capabilities,
-			})
-			vim.lsp.config("eslint", {
-				capabilities = capabilities,
-			})
-			vim.lsp.config("jsonls", {
-				capabilities = capabilities,
 			})
 			vim.lsp.enable("ts_ls")
 			vim.lsp.enable("html")
