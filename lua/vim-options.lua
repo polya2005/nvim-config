@@ -4,4 +4,8 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set rnu")
 vim.cmd("set number")
+vim.cmd("set foldmethod=expr")
+vim.cmd("set foldexpr=v:lua.vim.treesitter.foldexpr()")
+vim.cmd("set foldenable")
+vim.cmd("set foldlevel=99")
 vim.g.mapleader = " "
