@@ -9,7 +9,9 @@ return {
 			sources = {
 				null_ls.builtins.formatting.asmfmt,
 				null_ls.builtins.formatting.black,
-				null_ls.builtins.formatting.clang_format,
+				null_ls.builtins.formatting.clang_format.with({
+					filetypes = { "c", "cpp", "cs", "java", "cuda", "proto", "openscad" },
+				}),
 				null_ls.builtins.formatting.cmake_format,
 				null_ls.builtins.formatting.isort,
 				null_ls.builtins.formatting.mdformat,
@@ -22,5 +24,10 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {})
+		vim.api.nvim_create_autocmd("BufWrite", {
+			callback = function()
+				vim.lsp.buf.format()
+			end,
+		})
 	end,
 }
